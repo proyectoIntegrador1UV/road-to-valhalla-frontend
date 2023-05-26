@@ -27,7 +27,7 @@ jobs:
           aws-region: us-east-1
       - name: Sync files to S3 bucket
         run: |
-          aws s3 sync dist/watch-queue s3://roadtovalhalla
+          aws s3 sync build s3://roadtovalhalla
           echo "Bucket sync completed!"
       - name: Invalidate CloudFront cache
         run: |
