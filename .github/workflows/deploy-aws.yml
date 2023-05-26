@@ -3,7 +3,7 @@ name: Run deploy on aws
 on:
   push:
     branches:
-      - "develop"
+      - "master"
 
 jobs:
   deploy:
