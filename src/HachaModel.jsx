@@ -5,16 +5,15 @@ import Details from './Details';
 
 
 export default function HachaModel() {
+
     const gltf = useGLTF('/static/models/Hacha.glb');
     const [isDetail, setIsDetail] = useState(false);
 
     const handleOpen = () => {
-        console.log('Modelo Hacha clicado');
         setIsDetail(true);
     };
 
     const handleClose = () => {
-        console.log('cerrar')
         setIsDetail(false);
     };
 
@@ -43,6 +42,7 @@ export default function HachaModel() {
                     </mesh>
                     <mesh
                         position={[10, 8, 5]}
+                        onClick={handleOpen}
                         receiveShadow
                         castShadow
                         onReady={(mesh) => {
