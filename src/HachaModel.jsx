@@ -48,7 +48,7 @@ export default function HachaModel() {
                         >
                             <primitive object={gltf.scene} />
                         </mesh>
-                        <FigureLabel textLabel={'Hacha'} occlude={(hachaRef, labelRef)} position={[10, 12, 5]}/>
+                        <FigureLabel textLabel={'Hacha'} occlude={(hachaRef, labelRef)} position={[10, 5.5, 10]}/>
                    </group>
                     
                 </>

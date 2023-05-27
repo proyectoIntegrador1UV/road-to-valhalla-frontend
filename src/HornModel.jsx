@@ -43,7 +43,7 @@ export default function HornModel() {
               }}>
               <primitive object={gltf.scene} scale={[0.1, 0.1, 0.1]} />
             </mesh>
-            <FigureLabel textLabel={'Horn'} occlude={(hornRef, labelRef)} position={[29, 12, 5]}/>
+            <FigureLabel textLabel={'Horn'} occlude={(hornRef, labelRef)} position={[30, 5.5, 10]}/>
           </group>          
         </>
       )}

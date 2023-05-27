@@ -43,7 +43,7 @@ export default function ShieldModel() {
               }}>
               <primitive object={gltf.scene} />
             </mesh>
-            <FigureLabel textLabel={'Escudo'} occlude={(shieldRef, labelRef)} position={[20, 16 ,5]}/>
+            <FigureLabel textLabel={'Escudo'} occlude={(shieldRef, labelRef)} position={[20, 5.5, 10]}/>
           </group>
           
         </>

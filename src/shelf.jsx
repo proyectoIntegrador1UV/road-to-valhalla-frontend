@@ -9,8 +9,8 @@ export default function Shelf(props) {
                 rotation-x={-Math.PI * 0.5}
                 onClick={props.handleOpen}
             >
-                <boxGeometry args={[8, 8]} />
-                <meshStandardMaterial color="white" />
+                <boxGeometry args={[8, 8, 2]} />
+                <meshStandardMaterial color="#2C3E50" />
           </mesh>
         </>
     )
