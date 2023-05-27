@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import hachaImage from './assets/images/hachaImage.png';
 import Details from './Details';
-
+import Shelf from './shelf';
+import FigureLabel from './Label';
 
 export default function HachaModel() {
 
     const gltf = useGLTF('/static/models/Hacha.glb');
     const [isDetail, setIsDetail] = useState(false);
+    const hachaRef = useRef();
+    const labelRef = useRef();
 
     const handleOpen = () => {
         setIsDetail(true);
@@ -31,27 +34,23 @@ export default function HachaModel() {
                     url_img={hachaImage}                />
             ) : (
                 <>
-                    <mesh
-                        receiveShadow
-                        position={[10, 5, 5]}
-                        rotation-x={-Math.PI * 0.5}
-                        onClick={handleOpen}
-                    >
-                        <boxGeometry args={[8, 8]} />
-                        <meshStandardMaterial color="white" />
-                    </mesh>
-                    <mesh
-                        position={[10, 8, 5]}
-                        onClick={handleOpen}
-                        receiveShadow
-                        castShadow
-                        onReady={(mesh) => {
-                            mesh.receiveShadow = true;
-                            mesh.castShadow = true;
-                        }}
-                    >
-                        <primitive object={gltf.scene} />
-                    </mesh>
+                   <group>
+                        <Shelf handleOpen={handleOpen} position={[10,5,5]}/>
+                        <mesh
+                            position={[10, 8, 5]}
+                            onClick={handleOpen}
+                            receiveShadow
+                            castShadow
+                            onReady={(mesh) => {
+                                mesh.receiveShadow = true;
+                                mesh.castShadow = true;
+                            }}
+                        >
+                            <primitive object={gltf.scene} />
+                        </mesh>
+                        <FigureLabel textLabel={'Hacha'} occlude={(hachaRef, labelRef)} position={[9,12,5]}/>
+                   </group>
+                    
                 </>
             )}
         </>

@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import shieldImage from './assets/images/shieldImage.png';
 import Details from './Details';
+import Shelf from './shelf';
+import FigureLabel from './Label';
 
 export default function ShieldModel() {
 
   const gltf = useGLTF('/static/models/viking_shield.glb');
   const [isDetail, setIsDetail] = useState(false);
-
+  const shieldRef = useRef();
+  const labelRef = useRef();
   const handleOpen = () => {
     setIsDetail(true);
   };
@@ -26,26 +29,23 @@ export default function ShieldModel() {
           url_img={shieldImage} />
       ) : (
         <>
-          <mesh
-            receiveShadow
-            position={[20, 5, 5]}
-            rotation-x={-Math.PI * 0.5}
-            onClick={handleOpen}>
-            <boxGeometry args={[8, 8]} />
-            <meshStandardMaterial color="white" />
-          </mesh>
-          <mesh
-            position={[20, 10, 5]}
-            onClick={handleOpen}
-            receiveShadow
-            castShadow
-            onReady={(mesh) => {
-              mesh.receiveShadow = true;
-              mesh.castShadow = true;
-              mesh.scale.set(0.1, 0.1, 0.1); // Cambia el tamaño del modelo aquí
-            }}>
-            <primitive object={gltf.scene} />
-          </mesh>
+          <group>
+            <Shelf handleOpen={handleOpen} position={[20,5,5]}/>
+            <mesh
+              position={[20, 10, 5]}
+              onClick={handleOpen}
+              receiveShadow
+              castShadow
+              onReady={(mesh) => {
+                mesh.receiveShadow = true;
+                mesh.castShadow = true;
+                mesh.scale.set(0.1, 0.1, 0.1); // Cambia el tamaño del modelo aquí
+              }}>
+              <primitive object={gltf.scene} />
+            </mesh>
+            <FigureLabel textLabel={'Escudo'} occlude={(shieldRef, labelRef)} position={[20,15,5]}/>
+          </group>
+          
         </>
       )}
     </>

@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import hornImage from './assets/images/hornImage.png';
 import Details from './Details';
+import Shelf from './shelf';
+import FigureLabel from './Label';
 
 export default function HornModel() {
 
   const gltf = useGLTF('/static/models/viking_horn.glb');
   const [isDetail, setIsDetail] = useState(false);
+  const hornRef = useRef();
+  const labelRef = useRef();
 
   const handleOpen = () => {
     setIsDetail(true);
@@ -26,26 +30,21 @@ export default function HornModel() {
           url_img={hornImage} />
       ) : (
         <>
-          <mesh
-            receiveShadow
-            position={[30, 5, 5]}
-            rotation-x={-Math.PI * 0.5}
-            onClick={handleOpen}
-            >
-            <boxGeometry args={[8, 8]} />
-            <meshStandardMaterial color="white" />
-          </mesh>
-          <mesh 
-            position={[30, 8, 5]}
-            onClick={handleOpen}
-            receiveShadow
-            castShadow
-            onReady={(mesh) => {
-              mesh.receiveShadow = true;
-              mesh.castShadow = true;
-            }}>
-            <primitive object={gltf.scene} scale={[0.1, 0.1, 0.1]} />
-          </mesh>
+          <group>
+            <Shelf handleOpen={handleOpen} position={[30,5,5]}/>
+            <mesh 
+              position={[30, 8, 5]}
+              onClick={handleOpen}
+              receiveShadow
+              castShadow
+              onReady={(mesh) => {
+                mesh.receiveShadow = true;
+                mesh.castShadow = true;
+              }}>
+              <primitive object={gltf.scene} scale={[0.1, 0.1, 0.1]} />
+            </mesh>
+            <FigureLabel textLabel={'Horn'} occlude={(hornRef, labelRef)} position={[30,12,5]}/>
+          </group>          
         </>
       )}
 

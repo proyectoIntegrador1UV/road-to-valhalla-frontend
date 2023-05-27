@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import shipImage from './assets/images/shipImage.png';
 import Details from './Details';
-
+import Shelf from './shelf';
+import FigureLabel from './Label';
 
 export default function ShipModel() {
 
   const gltf = useGLTF('/static/models/stlized_viking_ship.glb');
   const [isDetail, setIsDetail] = useState(false);
-
+  const shipRef = useRef();
+  const labelRef = useRef();
   const handleOpen = () => {
     setIsDetail(true);
   };
@@ -27,25 +29,22 @@ export default function ShipModel() {
           url_img={shipImage} />
       ) : (
         <>
-          <mesh
-            receiveShadow
-            onClick={handleOpen}
-            position={[40, 5, 5]}
-            rotation-x={-Math.PI * 0.5}>
-            <boxGeometry args={[8, 8]} />
-            <meshStandardMaterial color="white" />
-          </mesh>
-          <mesh
-            position={[40, 7, -2]}
-            onClick={handleOpen}
-            receiveShadow
-            castShadow
-            onReady={(mesh) => {
-              mesh.receiveShadow = true;
-              mesh.castShadow = true;
-            }}>
-            <primitive object={gltf.scene} scale={[0.01, 0.01, 0.01]} />
-          </mesh>
+          <group>
+            <Shelf handleOpen={handleOpen} position={[40,5,5]}/>
+            <mesh
+              position={[40, 7, -2]}
+              onClick={handleOpen}
+              receiveShadow
+              castShadow
+              onReady={(mesh) => {
+                mesh.receiveShadow = true;
+                mesh.castShadow = true;
+              }}>
+              <primitive object={gltf.scene} scale={[0.01, 0.01, 0.01]} />
+            </mesh>
+            <FigureLabel textLabel={'Barco vikingo'} occlude={(shipRef, labelRef)} position={[40, 16, 5]}/>
+          </group>
+         
         </>
       )}
 
