@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useGLTF } from '@react-three/drei';
-import HachaDetail from './details/HachaDetail';
+import hachaImage from './assets/images/hachaImage.png';
+import Details from './Details';
 
 
 export default function HachaModel() {
@@ -20,7 +21,15 @@ export default function HachaModel() {
     return (
         <>
             {isDetail ? (
-                <HachaDetail isOpen={handleOpen} onClose={handleClose} handleClose={handleClose} />
+                <Details
+                    handleClose={handleClose}
+                    title={'Hacha Vikinga'}
+                    description={'El hacha vikinga es un arma utilizada por los guerreros vikingos durante la era vikinga. '+
+                    'Conocida por su diseño distintivo y su funcionalidad versátil, el hacha vikinga se'+
+                    'caracteriza por su cabeza de doble filo y su mango largo, lo que le permite ser utilizada'+
+                    'tanto para cortar como para golpear. Fue un arma importante en el arsenal vikingo y se'+
+                    'utilizaba tanto en batallas como en situaciones cotidianas.'}
+                    url_img={hachaImage}                />
             ) : (
                 <>
                     <mesh
