@@ -9,7 +9,7 @@ export default function HachaModel() {
         <>
             <mesh receiveShadow position={[10, 5, 5]} rotation-x={- Math.PI * 0.5}>
                 {/* <planeGeometry args={[8, 8]} /> */}
-                <boxGeometry args={[5, 5]} />
+                <boxGeometry args={[8, 8]} />
                 <meshStandardMaterial color="white" />
             </mesh>
             <mesh position={[10, 8, 5]} receiveShadow={true} castShadow={true} onReady={(mesh) => {
