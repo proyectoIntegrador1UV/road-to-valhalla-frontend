@@ -42,7 +42,7 @@ export default function ShipModel() {
               }}>
               <primitive object={gltf.scene} scale={[0.01, 0.01, 0.01]} />
             </mesh>
-            <FigureLabel textLabel={'Barco vikingo'} occlude={(shipRef, labelRef)} position={[40, 16, 5]}/>
+            <FigureLabel textLabel={'Barco vikingo'} occlude={(shipRef, labelRef)} position={[40, 17, 5]}/>
           </group>
          
         </>

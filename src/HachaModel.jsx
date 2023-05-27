@@ -35,7 +35,7 @@ export default function HachaModel() {
             ) : (
                 <>
                    <group>
-                        <Shelf handleOpen={handleOpen} position={[10,5,5]}/>
+                        <Shelf handleOpen={handleOpen} position={[10, 5, 5]}/>
                         <mesh
                             position={[10, 8, 5]}
                             onClick={handleOpen}
@@ -48,7 +48,7 @@ export default function HachaModel() {
                         >
                             <primitive object={gltf.scene} />
                         </mesh>
-                        <FigureLabel textLabel={'Hacha'} occlude={(hachaRef, labelRef)} position={[9,12,5]}/>
+                        <FigureLabel textLabel={'Hacha'} occlude={(hachaRef, labelRef)} position={[10, 12, 5]}/>
                    </group>
                     
                 </>

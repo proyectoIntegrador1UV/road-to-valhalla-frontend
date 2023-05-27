@@ -10,7 +10,7 @@ export default function FigureLabel({ position, textLabel, occlude }) {
         occlude={occlude}
         position={position}
       >
-        <h1>{textLabel}</h1>
+        <h1 style={{fontSize: '120px', fontFamily: 'Arial', fontWeight: 'bold'}}>{textLabel}</h1>
       </Html>
     </>
   );

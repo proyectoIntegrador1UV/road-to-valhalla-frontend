@@ -31,7 +31,7 @@ export default function HornModel() {
       ) : (
         <>
           <group>
-            <Shelf handleOpen={handleOpen} position={[30,5,5]}/>
+            <Shelf handleOpen={handleOpen} position={[30, 5, 5]}/>
             <mesh 
               position={[30, 8, 5]}
               onClick={handleOpen}
@@ -43,7 +43,7 @@ export default function HornModel() {
               }}>
               <primitive object={gltf.scene} scale={[0.1, 0.1, 0.1]} />
             </mesh>
-            <FigureLabel textLabel={'Horn'} occlude={(hornRef, labelRef)} position={[30,12,5]}/>
+            <FigureLabel textLabel={'Horn'} occlude={(hornRef, labelRef)} position={[29, 12, 5]}/>
           </group>          
         </>
       )}
