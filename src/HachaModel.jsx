@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
-import hachaImage from './assets/images/hachaImage.png';
 import Details from './Details';
 import Shelf from './shelf';
 import FigureLabel from './Label';
@@ -31,7 +30,7 @@ export default function HachaModel() {
                     'caracteriza por su cabeza de doble filo y su mango largo, lo que le permite ser utilizada'+
                     'tanto para cortar como para golpear. Fue un arma importante en el arsenal vikingo y se'+
                     'utilizaba tanto en batallas como en situaciones cotidianas.'}
-                    url_img={hachaImage}                />
+                                  />
             ) : (
                 <>
                    <group>
