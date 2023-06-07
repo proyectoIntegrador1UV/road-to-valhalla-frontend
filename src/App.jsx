@@ -5,7 +5,6 @@ import { OrbitControls } from '@react-three/drei';
 import { MOUSE } from 'three';
 import ThreeScene from './home/components/ThreeScene';
 import Login from './login/components/Login';
-import SignUp from "./login/components/SignUp";
 import HornModel from './home/components/HornModel';
 import ShipModel from './home/components/ShipModel';
 import Floor from './home/components/Floor';
@@ -24,7 +23,6 @@ function App() {
         <Routes>
           <Route exact path='*' element={<Login/>}></Route>
           <Route exact path='/login' element={<Login/>}></Route>
-          <Route exact path='/signup' element={<SignUp/>}></Route>
           <Route exact path='/home' element={
             <>
               <ThreeScene>

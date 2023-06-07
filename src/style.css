@@ -62,11 +62,17 @@ body,
     align-items: center;
 }
 
-.text-title, .text-login {
+.text-title, .text-login, .link {
     text-align: center;
 }
 
 .text-title {
     font-family: 'Tilt Prism', cursive;
     padding-top: 30px;
+}
+
+.link {
+    color: #3f51b5;
+    text-decoration: underline;
+    cursor: pointer;
 }
