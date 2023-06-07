@@ -1,6 +1,6 @@
 import { Html, Text, useTexture } from '@react-three/drei';
 import { DoubleSide } from "three";
-import titleImage from './assets/images/titleWall.png';
+import titleImage from './../../assets/images/titleWall.png';
 
 export default function WelcomeWall() {
     const PATH = "/static/textures/wall/";

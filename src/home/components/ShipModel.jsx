@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
-import shipImage from './assets/images/shipImage.png';
+import shipImage from './../../assets/images/shipImage.png';
 import Details from './Details';
-import Shelf from './shelf';
+import Shelf from './Shelf';
 import FigureLabel from './Label';
 
 export default function ShipModel() {
