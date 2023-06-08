@@ -49,8 +49,7 @@ function Login({ setIsToken }) {
             setIsCreated(true);
             setIsRegister(false);
         })
-        .catch((error) => {
-            console.log(error);
+        .catch(() => {
             setIsLoading(false);
             setIsErrorCreated(true);
         })
