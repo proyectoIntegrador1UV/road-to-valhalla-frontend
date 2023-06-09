@@ -14,39 +14,40 @@ import ShieldModel from './home/components/ShieldModel';
 
 function App() {
 
-  const [ isToken, setIsToken ] = useState(false);
-  const [ name, setName ] = useState('');
+  const [isToken, setIsToken] = useState(false);
 
   return (
     <>
       <Router>
         <Routes>
-          <Route exact path='*' element={<Login/>}></Route>
-          <Route exact path='/login' element={<Login/>}></Route>
-          <Route exact path='/home' element={
-            <>
-              <ThreeScene>
-                <OrbitControls
-                  makeDefault
-                  maxDistance={80}
-                  minDistance={60}
-                  mouseButtons={{
-                    LEFT: MOUSE.PAN,
-                    MIDDLE: MOUSE.ROTATE,
-                  }}
-                />
-                <directionalLight intensity={1.5} />
-                <ambientLight intensity={0.5} />
-                <WelcomeWall />
-                <Floor />
-                <HachaModel />
-                <ShieldModel />
-                <HornModel />
-                <ShipModel />
-              </ThreeScene>
-            </>
-          }>
-          </Route>
+          <Route exact path='*' element={<Login setIsToken={setIsToken} />}></Route>
+          <Route exact path='/login' element={<Login setIsToken={setIsToken} />}></Route>
+          {isToken &&
+            <Route exact path='/home' element={
+              <>
+                <ThreeScene>
+                  <OrbitControls
+                    makeDefault
+                    maxDistance={80}
+                    minDistance={60}
+                    mouseButtons={{
+                      LEFT: MOUSE.PAN,
+                      MIDDLE: MOUSE.ROTATE,
+                    }}
+                  />
+                  <directionalLight intensity={1.5} />
+                  <ambientLight intensity={0.5} />
+                  <WelcomeWall />
+                  <Floor />
+                  <HachaModel />
+                  <ShieldModel />
+                  <HornModel />
+                  <ShipModel />
+                </ThreeScene>
+              </>
+            }>
+            </Route>
+          }
         </Routes>
       </Router>
     </>
