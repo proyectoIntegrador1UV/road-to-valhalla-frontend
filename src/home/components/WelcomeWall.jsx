@@ -16,8 +16,8 @@ export default function WelcomeWall() {
 
     return (
         <>
-            <mesh receiveShadow position={[-18, 13, 15]} rotation-z={-Math.PI * 2}>
-                <planeGeometry args={[30, 50, 2]} />
+            <mesh receiveShadow position={[-150, 0, -15]} rotation-z={-Math.PI * 2}>
+                <planeGeometry args={[600, 300, 2]} />
                 <meshStandardMaterial color="#2C3E50" />
 
                 <Text
@@ -35,10 +35,16 @@ export default function WelcomeWall() {
                     {/* Road to Valhalla */}
                 </Text>
             </mesh>
-            <mesh receiveShadow position={[45, 9, -20]} rotation-x={-Math.PI * 90}>
-                <planeGeometry args={[200, 50]} />
-                <meshStandardMaterial {...props} side={DoubleSide} />
+            <mesh receiveShadow position={[-150, 50, -100]} rotation-x={-Math.PI * 90}>
+                <planeGeometry args={[1550, 340]} />
+                <meshStandardMaterial {...props} side={DoubleSide}  />
             </mesh>
+            <mesh receiveShadow position={[2000, 50, -100]} rotation-x={-Math.PI * 90}>
+                <planeGeometry args={[1550, 340]} />
+                <meshStandardMaterial {...props} side={DoubleSide}  />
+            </mesh>
+            
+            
         </>
     );
 }
