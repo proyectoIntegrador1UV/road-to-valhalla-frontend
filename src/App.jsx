@@ -6,8 +6,7 @@ import Experience from './home/components/Experience';
 
 function App() {
 
-  const [ isToken, setIsToken ] = useState(false);
-  const [ name, setName ] = useState('');
+  const [isToken, setIsToken] = useState(false);
 
   return (
     <>
