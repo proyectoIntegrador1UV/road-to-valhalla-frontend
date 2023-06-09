@@ -13,8 +13,8 @@ export default function Floor() {
         cubeMap: PATH + 'WoodFlooring044_Cube.jpg'
     })
     return (
-        <mesh receiveShadow position={[45, 0, 0]} rotation-x={- Math.PI * 0.5}>
-            <planeGeometry args={[200, 100]} />
+        <mesh receiveShadow position={[-120, -180, 100]} rotation-x={- Math.PI * 0.5}>
+            <planeGeometry args={[6000, 1000]} />
             <meshStandardMaterial {...props} side={DoubleSide}/>
         </mesh>
     )
