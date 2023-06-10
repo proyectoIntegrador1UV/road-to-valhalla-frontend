@@ -12,14 +12,17 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route exact path='*' element={<Login/>}></Route>
-          <Route exact path='/login' element={<Login/>}></Route>
-          <Route exact path='/home' element={
-            <ThreeScene>
-              <Experience/>
-            </ThreeScene>
-          }>
-          </Route>
+          <Route exact path='*' element={<Login setIsToken={setIsToken} />}></Route>
+          <Route exact path='/login' element={<Login setIsToken={setIsToken} />}></Route>
+          {
+            isToken &&
+            <Route exact path='/home' element={
+              <ThreeScene>
+                <Experience />
+              </ThreeScene>
+            }>
+            </Route>
+          }
         </Routes>
       </Router>
     </>
