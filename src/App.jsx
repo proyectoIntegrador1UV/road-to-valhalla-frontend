@@ -1,36 +1,30 @@
-import ThreeScene from "./ThreeScene";
-import { OrbitControls} from "@react-three/drei";
-import { MOUSE } from "three";
-
-import HornModel from './HornModel';
-import ShipModel from './ShipModel';
-import Floor from './Floor';
-import WelcomeWall from './WelcomeWall';
-import HachaModel from './HachaModel';
-import ShieldModel from './ShieldModel';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ThreeScene from './home/components/ThreeScene';
+import Login from './login/components/Login';
+import Experience from './home/components/Experience';
 
 function App() {
+
+  const [isToken, setIsToken] = useState(false);
+
   return (
     <>
-      <ThreeScene>
-        <OrbitControls
-          makeDefault
-          maxDistance={80}
-          minDistance={60}
-          mouseButtons={{
-            LEFT: MOUSE.PAN,
-            MIDDLE: MOUSE.ROTATE,
-          }}
-        />
-        <directionalLight intensity={1.5} />
-        <ambientLight intensity={0.5}/>
-        <WelcomeWall />
-        <Floor />
-        <HachaModel />
-        <ShieldModel />
-        <HornModel />
-        <ShipModel />
-      </ThreeScene>
+      <Router>
+        <Routes>
+          <Route exact path='*' element={<Login setIsToken={setIsToken} />}></Route>
+          <Route exact path='/login' element={<Login setIsToken={setIsToken} />}></Route>
+          {
+            isToken &&
+            <Route exact path='/home' element={
+              <ThreeScene>
+                <Experience />
+              </ThreeScene>
+            }>
+            </Route>
+          }
+        </Routes>
+      </Router>
     </>
   );
 }
