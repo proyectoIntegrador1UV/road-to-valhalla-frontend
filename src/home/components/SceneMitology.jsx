@@ -2,45 +2,97 @@ import React, { useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import Details from './Details';
 import Shelf from './Shelf';
-import FigureLabel from './Label';
 import shipImage from './../../assets/images/shipImage.png';
+import hornImage from './../../assets/images/hornImage.png';
+import martilloImage from './../../assets/images/martillo.jpg';
+import calizImage from './../../assets/images/caliz.jpg';
+import totemImage from './../../assets/images/totems.jpg';
 
 export function SceneMitology(props) {
   const { nodes, materials } = useGLTF("/static/models/scene.glb");
 
-  const [isDetail, setIsDetail] = useState(false);
+  const [isDetailCuerno, setIsDetailCuerno] = useState(false);
+  const [isDetailMartillo, setIsDetailMartillo] = useState(false);
+  const [isDetailCaliz, setIsDetailCaliz] = useState(false);
+  const [isDetailTotem, setIsDetailTotem] = useState(false);
+  const [isDetailBarco, setIsDetailBarco] = useState(false);
+  
   //Manejador de Evento de Detalle Abierto
-  const handleOpen = () => {
-    setIsDetail(true);
+  const handleOpenCuerno = () => {
+    setIsDetailCuerno(true);
   };
+
+  const handleOpenMartillo = () => {
+    setIsDetailMartillo(true);
+  }
+
+  const handleOpenCaliz = () => {
+    setIsDetailCaliz(true);
+  }
+
+  const handleOpenTotem = () => {
+    setIsDetailTotem(true);
+  }
+
+  const handleOpenBarco = () => {
+    setIsDetailBarco(true);
+  }
 
   //Manejador de Evento de Detalle Cerrado
   const handleClose = () => {
-    setIsDetail(false);
+    setIsDetailCuerno(false);
+    setIsDetailBarco(false);
+    setIsDetailCaliz(false);
+    setIsDetailMartillo(false);
+    setIsDetailTotem(false);
   };
 
-  
-  //Manejo de Brillo Superpuesto al Objeto Pedestal
-  const handleOver = () => {
-    console.log("ENTRAR")
-  }
-  const handleLeave = () => {
-    console.log("SALIR")
-  }
-  
   return (
     <>
-      {isDetail ? (
+      {
+        isDetailCuerno &&
         <Details
           handleClose={handleClose}
-          title={'Title'}
-          description={' El veloz murciélago hindú comía feliz cardillo y kiwi. La cigüeña tocaba el saxofón detrás del palenque de paja.El veloz murciélago hindú comía feliz cardillo y kiwi. La cigüeña tocaba el saxofón detrás del palenque de paja.El veloz murciélago hindú comía feliz cardillo y kiwi. La cigüeña tocaba el saxofón detrás del palenque de paja.'}
+          title={'Cuerno Vikingo'}
+          description={'El cuerno vikingo es un símbolo emblemático de la cultura nórdica antigua. A menudo asociado con los vikingos, los cuernos evocan imágenes de valentía, aventura y poder. Si bien se ha popularizado la idea de que los vikingos bebían de cuernos durante festividades y rituales, en realidad, los cuernos vikingos eran más utilizados como recipientes decorativos o como elementos simbólicos en ceremonias.'}
+          url_img={hornImage} />
+      }
+      {
+        isDetailBarco &&
+        <Details
+          handleClose={handleClose}
+          title={'Barco Vikingo'}
+          description={'Los barcos vikingos, conocidos como drakkars, eran impresionantes y temidos en los mares del norte. Estas embarcaciones robustas y ágiles eran la herramienta principal de los vikingos para explorar, comerciar y conquistar. Con sus proas decoradas con elaboradas cabezas de dragones, los barcos vikingos se deslizaban por el agua con gran velocidad y destreza. Con sus velas cuadradas y remos largos.'}
           url_img={shipImage} />
-      ) : (
+      }
+      {
+        isDetailCaliz && 
+        <Details
+          handleClose={handleClose}
+          title={'Caliz Vikingo'}
+          description={'El cáliz vikingo es una pieza de arte y religión que refleja la espiritualidad de los antiguos vikingos. Estos cálices, elaborados con materiales como la plata u otros metales preciosos, eran utilizados en ceremonias sagradas y rituales relacionados con la adoración de los dioses nórdicos. Los cálices vikingos se caracterizan por sus diseños intrincados y su elaborada decoración.'}
+          url_img={calizImage} />
+      }
+      {
+        isDetailMartillo && 
+        <Details
+          handleClose={handleClose}
+          title={'Martillo Vikingo'}
+          description={'El martillo vikingo, conocido como Mjölnir, es uno de los símbolos más reconocidos de la mitología nórdica. Era el arma y amuleto mágico del dios Thor, quien era venerado por los vikingos como el protector de la humanidad y defensor de los dioses. El martillo vikingo era representado como un arma poderosa capaz de lanzar rayos y proteger a su portador de los enemigos y los espíritus malignos.'}
+          url_img={martilloImage} />
+      }
+      {
+        isDetailTotem && 
+        <Details
+          handleClose={handleClose}
+          title={'Totem Vikingo'}
+          description={'En la mitología nórdica, existían criaturas míticas y animales sagrados que se consideraban protectores y guías espirituales. Por ejemplo, el lobo Fenrir y el dragón Níðhöggr eran criaturas temidas y respetadas en la mitología nórdica. También se cree que los vikingos honraban a los animales, como el cuervo, el lobo, el oso y el águila, que simbolizaban características como la sabiduría, la ferocidad, el coraje y la astucia.'}
+          url_img={totemImage} />
+      }
       <>
         <group {...props} dispose={null}>
-          <group rotation={[Math.PI / 2, 0, 0]} scale={0.08} position={[800,-250,-1000]}>
-          <Shelf handleOpen={handleOpen} position={[40,5,5]}/>
+          <group rotation={[Math.PI / 2, 0, 0]} scale={0.08} position={[800, -250, -1000]}>
+            <Shelf position={[40, 5, 5]} />
             <mesh
               castShadow
               receiveShadow
@@ -329,8 +381,8 @@ export function SceneMitology(props) {
               receiveShadow
               geometry={nodes.Scene124_47.geometry}
               material={materials["PolyVikings_Material_01.074"]}
-              onClick={handleOpen}
-              onPointerEnter={handleOver}
+              onClick={handleOpenCuerno}
+              // onPointerEnter={handleOver}
               onReady={(mesh) => {
                 mesh.receiveShadow = true;
                 mesh.castShadow = true;
@@ -342,7 +394,7 @@ export function SceneMitology(props) {
               receiveShadow
               geometry={nodes.Scene124_48.geometry}
               material={materials["PolyVikings_Material_01.075"]}
-              onClick={handleOpen}
+              onClick={handleOpenMartillo}
               onReady={(mesh) => {
                 mesh.receiveShadow = true;
                 mesh.castShadow = true;
@@ -354,7 +406,7 @@ export function SceneMitology(props) {
               receiveShadow
               geometry={nodes.Scene124_49.geometry}
               material={materials["PolyVikings_Material_01.140"]}
-              onClick={handleOpen}
+              onClick={handleOpenCaliz}
               onReady={(mesh) => {
                 mesh.receiveShadow = true;
                 mesh.castShadow = true;
@@ -366,7 +418,7 @@ export function SceneMitology(props) {
               receiveShadow
               geometry={nodes.Scene124_50.geometry}
               material={materials["PolyVikings_Material_01.076"]}
-              onClick={handleOpen}
+              onClick={handleOpenTotem}
               onReady={(mesh) => {
                 mesh.receiveShadow = true;
                 mesh.castShadow = true;
@@ -378,7 +430,7 @@ export function SceneMitology(props) {
               receiveShadow
               geometry={nodes.Scene124_51.geometry}
               material={materials["PolyVikings_Material_01.078"]}
-              onClick={handleOpen}
+              onClick={handleOpenBarco}
               onReady={(mesh) => {
                 mesh.receiveShadow = true;
                 mesh.castShadow = true;
@@ -387,7 +439,6 @@ export function SceneMitology(props) {
           </group>
         </group>
       </>
-      )}
     </>
   );
 }

@@ -17,8 +17,8 @@ export default function WelcomeWall() {
 
     return (
         <>
-            <mesh receiveShadow position={[-150, 0, -15]} rotation-z={-Math.PI * 2}>
-                <planeGeometry args={[600, 300, 2]} />
+            <mesh receiveShadow position={[-150, 0, -35]} rotation-z={-Math.PI * 2}>
+                <planeGeometry args={[1000, 700, 2]} />
                 <meshStandardMaterial color="#2C3E50" />
 
                 <Text
