@@ -3,7 +3,7 @@ import { Html } from '@react-three/drei';
 export default function Details(props) {
     return (
         <>
-            <Html position={[0, 0, 0]}>
+            <Html position={[1850, 0, 0]}>
                 <div
                     style={{
                         position: 'absolute',
