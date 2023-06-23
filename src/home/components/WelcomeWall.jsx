@@ -54,10 +54,16 @@ export default function WelcomeWall() {
                 <planeGeometry args={[1550, 340]} />
                 <meshStandardMaterial {...props} side={DoubleSide}  />
             </mesh>
-            <mesh receiveShadow position={[2000, 50, -100]} rotation-x={-Math.PI * 90}>
-                <planeGeometry args={[1550, 340]} />
+            <mesh receiveShadow position={[1750, 50, -100]} rotation-x={-Math.PI * 90}>
+                <planeGeometry args={[1030, 340]} />
                 <meshStandardMaterial {...props} side={DoubleSide}  />
             </mesh>
+            <mesh receiveShadow position={[3570, 50, -100]} rotation-x={-Math.PI * 90}>
+                <planeGeometry args={[1000, 340]} />
+                <meshStandardMaterial {...props} side={DoubleSide}  />
+            </mesh>
+            
+
             
             
         </>
