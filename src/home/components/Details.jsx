@@ -1,36 +1,21 @@
 import { Html } from '@react-three/drei';
-import { useEffect, useRef } from 'react';
 
 export default function Details(props) {
-
-    useEffect(() => {
-        const container = containerRef.current;
-        if (!container) return;
-
-        const handleWindowResize = () => {
-            const { width, height } = container.getBoundingClientRect();
-            container.style.transform = `translate(-${width / 2}px, -${height / 2}px)`;
-        };
-
-        handleWindowResize(); // Centrar inicialmente
-
-        window.addEventListener('resize', handleWindowResize);
-        return () => {
-            window.removeEventListener('resize', handleWindowResize);
-        };
-    }, []);
-
+    
     return (
         <>
             <Html {...props}>
-                <div
-                    ref={containerRef}
+                <div 
                     style={{
-                      position: 'fixed',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)',
-                      zIndex: 9999,
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        zIndex: 9999,
                     }}>
                     <div
                         style={{
