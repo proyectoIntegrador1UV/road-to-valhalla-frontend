@@ -6,7 +6,7 @@ import Experience from './home/components/Experience';
 
 function App() {
 
-  const [isToken, setIsToken] = useState(false);
+  const [isToken, setIsToken] = useState(true);
 
   return (
     <>
@@ -17,9 +17,7 @@ function App() {
           {
             isToken &&
             <Route exact path='/home' element={
-              <ThreeScene>
-                <Experience />
-              </ThreeScene>
+              <Experience />
             }>
             </Route>
           }
