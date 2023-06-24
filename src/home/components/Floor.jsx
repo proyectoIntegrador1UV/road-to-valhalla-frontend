@@ -14,7 +14,7 @@ export default function Floor() {
     })
     return (
         <mesh receiveShadow position={[-120, -180, 100]} rotation-x={- Math.PI * 0.5}>
-            <planeGeometry args={[6000, 1000]} />
+            <planeGeometry args={[8000, 1000]} />
             <meshStandardMaterial {...props} side={DoubleSide}/>
         </mesh>
     )

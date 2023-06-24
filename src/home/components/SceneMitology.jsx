@@ -52,6 +52,7 @@ export function SceneMitology(props) {
       {
         isDetailCuerno &&
         <Details
+          position={[1850, 0, 0]}
           handleClose={handleClose}
           title={'Cuerno Vikingo'}
           description={'El cuerno vikingo es un símbolo emblemático de la cultura nórdica antigua. A menudo asociado con los vikingos, los cuernos evocan imágenes de valentía, aventura y poder. Si bien se ha popularizado la idea de que los vikingos bebían de cuernos durante festividades y rituales, en realidad, los cuernos vikingos eran más utilizados como recipientes decorativos o como elementos simbólicos en ceremonias.'}
@@ -60,6 +61,7 @@ export function SceneMitology(props) {
       {
         isDetailBarco &&
         <Details
+          position={[1850, 0, 0]}
           handleClose={handleClose}
           title={'Barco Vikingo'}
           description={'Los barcos vikingos, conocidos como drakkars, eran impresionantes y temidos en los mares del norte. Estas embarcaciones robustas y ágiles eran la herramienta principal de los vikingos para explorar, comerciar y conquistar. Con sus proas decoradas con elaboradas cabezas de dragones, los barcos vikingos se deslizaban por el agua con gran velocidad y destreza. Con sus velas cuadradas y remos largos.'}
@@ -68,6 +70,7 @@ export function SceneMitology(props) {
       {
         isDetailCaliz && 
         <Details
+          position={[1850, 0, 0]}
           handleClose={handleClose}
           title={'Caliz Vikingo'}
           description={'El cáliz vikingo es una pieza de arte y religión que refleja la espiritualidad de los antiguos vikingos. Estos cálices, elaborados con materiales como la plata u otros metales preciosos, eran utilizados en ceremonias sagradas y rituales relacionados con la adoración de los dioses nórdicos. Los cálices vikingos se caracterizan por sus diseños intrincados y su elaborada decoración.'}
@@ -76,14 +79,16 @@ export function SceneMitology(props) {
       {
         isDetailMartillo && 
         <Details
+          position={[1850, 0, 0]}
           handleClose={handleClose}
           title={'Martillo Vikingo'}
           description={'El martillo vikingo, conocido como Mjölnir, es uno de los símbolos más reconocidos de la mitología nórdica. Era el arma y amuleto mágico del dios Thor, quien era venerado por los vikingos como el protector de la humanidad y defensor de los dioses. El martillo vikingo era representado como un arma poderosa capaz de lanzar rayos y proteger a su portador de los enemigos y los espíritus malignos.'}
           url_img={martilloImage} />
       }
       {
-        isDetailTotem && 
+        isDetailTotem &&
         <Details
+          position={[1850, 0, 0]}
           handleClose={handleClose}
           title={'Totem Vikingo'}
           description={'En la mitología nórdica, existían criaturas míticas y animales sagrados que se consideraban protectores y guías espirituales. Por ejemplo, el lobo Fenrir y el dragón Níðhöggr eran criaturas temidas y respetadas en la mitología nórdica. También se cree que los vikingos honraban a los animales, como el cuervo, el lobo, el oso y el águila, que simbolizaban características como la sabiduría, la ferocidad, el coraje y la astucia.'}
