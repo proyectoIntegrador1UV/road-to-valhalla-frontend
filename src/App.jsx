@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ThreeScene from './home/components/ThreeScene';
 import Login from './login/components/Login';
 import Experience from './home/components/Experience';
+import { Quiz } from './quiz/quiz';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path='*' element={<Login setIsToken={setIsToken} />}></Route>
+          <Route exact path='/quiz' element={<Quiz />}></Route>
           <Route exact path='/login' element={<Login setIsToken={setIsToken} />}></Route>
           {
             isToken &&

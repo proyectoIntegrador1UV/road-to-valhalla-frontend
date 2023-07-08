@@ -10,8 +10,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import Avatar from '@mui/material/Avatar';
 import { orange } from '@mui/material/colors';
 import { Grid } from '@mui/material';
@@ -19,6 +17,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import AssistantDirectionIcon from '@mui/icons-material/AssistantDirection';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from "react-router-dom";
 
 export default function Options() {
 
@@ -37,6 +36,12 @@ export default function Options() {
 
         setState({ ...state, [anchor]: open });
         setAnchorEl(false);
+    };
+
+    const navigate = useNavigate();
+
+    const handleGotoQuiz = () => {
+        navigate('/quiz')
     };
 
     const list = (anchor) => (
@@ -61,8 +66,8 @@ export default function Options() {
                 {['Mi cuenta', 'Mis quices', '¿Cómo navegar?'].map((text, index) => (
                     <ListItem key={text} disablePadding>
 
-                        <ListItemButton>
-                            <ListItemIcon>
+                        <ListItemButton onClick={handleGotoQuiz}>
+                            <ListItemIcon >
                                 {index === 0 && <AccountCircleIcon /> }
                                 {index === 1 && <NoteAltIcon /> } 
                                 {index === 2 && <AssistantDirectionIcon /> }
