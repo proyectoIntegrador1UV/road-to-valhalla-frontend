@@ -1,8 +1,10 @@
 import { Html } from '@react-three/drei';
+import Modal from '@mui/material/Modal';
 
 export default function Details(props) {
-    
+
     return (
+
             <Html {...props} occlude={true}>
                 <div
                     style={{
