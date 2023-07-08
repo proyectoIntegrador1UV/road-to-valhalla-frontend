@@ -109,7 +109,7 @@ export default function SceneEconomic(props) {
       }
       <>
         <group ref={group} {...props} dispose={null}>
-          <group position={[2700, -230, -1000]} scale={27}>
+          <group position={[5180, -230, -1000]} scale={23}>
             <Shelf position={[40, 5, 5]}/>
             <mesh
               name="Flag"

@@ -2,6 +2,10 @@ import { Html, Text, useTexture } from '@react-three/drei';
 import { DoubleSide } from "three";
 import titleImage from './../../assets/images/titleWall.png';
 import navImage from './../../assets/images/nav02.png';
+import { Wall } from './Wall';
+import { MitoWall } from './MitoWall';
+import { PoliticoWall } from './PoliticoWall';
+import { CulturalWall } from './CulturalWall';
 
 export default function WelcomeWall() {
     const PATH = "/static/textures/wall/";
@@ -17,6 +21,7 @@ export default function WelcomeWall() {
 
     return (
         <>
+        {
             <mesh receiveShadow position={[-150, 0, -35]} rotation-z={-Math.PI * 2}>
                 <planeGeometry args={[1000, 700, 2]} />
                 <meshStandardMaterial color="#2C3E50" />
@@ -33,7 +38,7 @@ export default function WelcomeWall() {
                     <Html position={[-11, 8, 0.1]}>
                         <img src={titleImage}/>
                     </Html>
-                    {/* Road to Valhalla */}
+                   
                 </Text>
                 <Text
                     position={[0, 0, 0.1]}
@@ -47,21 +52,33 @@ export default function WelcomeWall() {
                     <Html position={[285, 100, 0.1]}>
                         <img src={navImage} sizes='500px' width="391" height="306"/>
                     </Html>
-                    {/* Nav Inicial*/}
+               
                 </Text>
+            
             </mesh>
-            <mesh receiveShadow position={[-150, 50, -100]} rotation-x={-Math.PI * 90}>
-                <planeGeometry args={[1550, 340]} />
-                <meshStandardMaterial {...props} side={DoubleSide}  />
-            </mesh>
-            <mesh receiveShadow position={[1750, 50, -100]} rotation-x={-Math.PI * 90}>
-                <planeGeometry args={[1030, 340]} />
-                <meshStandardMaterial {...props} side={DoubleSide}  />
-            </mesh>
-            <mesh receiveShadow position={[3570, 50, -100]} rotation-x={-Math.PI * 90}>
-                <planeGeometry args={[1000, 340]} />
-                <meshStandardMaterial {...props} side={DoubleSide}  />
-            </mesh>
+    }
+
+
+            <MitoWall position={[-7000, 10, -220]}/>
+
+       
+
+            <Wall position={[2150, 20, -220]}/>
+            <Wall position={[2820, 20, -220]}/>
+            <Wall position={[3500, 20, -220]}/>
+
+            <PoliticoWall position={[-3400, 26, -120]} />
+
+
+            <Wall position={[5830, 20, -220]}/>
+            <Wall position={[6510, 20, -220]}/>
+
+            <CulturalWall position={[-390, 26, -120]}/>
+
+            <Wall position={[8800, 20, -220]}/>
+            <Wall position={[9480, 20, -220]}/>
+            <Wall position={[10080, 20, -220]}/>
+
             
 
             
