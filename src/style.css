@@ -76,3 +76,14 @@ body,
     text-decoration: underline;
     cursor: pointer;
 }
+
+.text-wall{
+    position: absolute;
+    top: 200px;
+    left: 30px;
+    bottom: 40px;
+    z-index: 2;
+    margin: 0;
+    padding: 0 ;
+    
+}
