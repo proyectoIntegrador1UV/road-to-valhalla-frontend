@@ -6,39 +6,39 @@ import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import ErrorIcon from '@mui/icons-material/Error';
 import Loading from '../../shared/components/Loading';
 import Dialog from '@mui/material/Dialog';
-import { authUser, registerUser } from './../../services/authService';
+import { getUser, updateUser } from '../../services/userService';
 
-function Login({ setIsToken }) {
+function Users() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [isRegister, setIsRegister] = useState(false);
+    const [isUpdated, setIsUpdated] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [isCreated, setIsCreated] = useState(false);
     const [isError, setIsError] = useState(false);
-    const [isErrorCreated, setIsErrorCreated] = useState(false);
+    const id = localStorage.getItem('uid');
 
-    let isFormLoginValid = (username !== '') && (password !== '');
-    let isFormRegisterValid = (isFormLoginValid) && (email !== '');
+    let isFormValid = (username !== '') && (password !== '') && (email !== '');
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        localStorage.clear();
-    }, []);
+        getUser(id).then((res) => {
+            setUsername(res.data.username);
+            setEmail(res.data.email);
+        }).catch(() => {
+            setIsError(true);
+        })
+    }, [])
 
     const handleSubmit = (event) => {
         event.preventDefault();
         setIsLoading(true);
-        authUser(username, password)
+        updateUser(username, email, password, id)
         .then((res) => {
-            localStorage.setItem('jwt', res.data.jwt);
-            localStorage.setItem('username', res.data.user.username);
-            localStorage.setItem('uid', res.data.user.id);
+            localStorage.setItem('username', res.data.username);
             setIsLoading(false);
-            setIsToken(true);
-            navigate(`/home`);
+            setIsUpdated(true);
         })
         .catch(() => {
             setIsLoading(false);
@@ -46,36 +46,17 @@ function Login({ setIsToken }) {
         })
     }
 
-    const handleCreateUser = (event) => {
-        event.preventDefault();
-        setIsLoading(true);
-        registerUser(username, email, password)
-        .then(() => {
-            setIsLoading(false);
-            setIsCreated(true);
-            setIsRegister(false);
-        })
-        .catch(() => {
-            setIsLoading(false);
-            setIsErrorCreated(true);
-        })
-    }
-
-    const handleIsCreated = () => {
-        setIsCreated(false);
+    const handleIsUpdate = () => {
+        setIsUpdated(false);
+        navigate('/home');
     }
 
     const handleIsError = () => {
         setIsError(false);
-        setIsErrorCreated(false);
     }
 
-    const handleChange = () => {
-        if (isRegister) {
-            setIsRegister(false);
-        } else {
-            setIsRegister(true);
-        }
+    const handleToHome = () => {
+        navigate('/home');
     }
 
     return (
@@ -94,24 +75,16 @@ function Login({ setIsToken }) {
                                         noValidate
                                         autoComplete="off"
                                     >
-                                        <h1 className='text-title'>Road to Valhalla</h1>
-                                        {!isRegister &&
-                                            <p className='text-login'>Login</p>
-                                        }
-                                        {isRegister &&
-                                            <p className='text-login'>Register</p>
-                                        }
-                                        {isRegister &&
-                                            <TextField
-                                                id="email"
-                                                label="Correo electrónico"
-                                                variant="outlined"
-                                                type='email'
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                style={{ width: '97%' }}
-                                            />
-                                        }
+                                        <h1 className='text-title'>Mi cuenta</h1>
+                                        <TextField
+                                            id="email"
+                                            label="Correo electrónico"
+                                            variant="outlined"
+                                            type='email'
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            style={{ width: '97%' }}
+                                        />
                                         <TextField
                                             id="username"
                                             label="Usuario"
@@ -124,7 +97,7 @@ function Login({ setIsToken }) {
                                         <br />
                                         <TextField
                                             id="password"
-                                            label="Contraseña"
+                                            label="Confirmar contraseña"
                                             variant="outlined"
                                             type='password'
                                             value={password}
@@ -134,19 +107,9 @@ function Login({ setIsToken }) {
                                     </Box>
                                 </CardContent>
                                 <CardActions style={{ justifyContent: 'center' }}>
-                                    {!isRegister &&
-                                        <Button variant="contained" onClick={handleSubmit} disabled={!isFormLoginValid}>Iniciar sesión</Button>
-                                    }
-                                    {isRegister &&
-                                        <Button variant="contained" onClick={handleCreateUser} disabled={!isFormRegisterValid}>Registrarme</Button>
-                                    }
+                                    <Button variant="contained" onClick={handleSubmit} disabled={!isFormValid}>Actualizar información</Button>
+                                    <Button variant="outlined" onClick={handleToHome}>Cancelar</Button>
                                 </CardActions>
-                                {!isRegister &&
-                                    <p className='text-login'>¿No tienes una cuenta? <a className='link' onClick={handleChange}>Creala aquí</a></p>
-                                }
-                                {isRegister &&
-                                    <p className='text-login' style={{ paddingBottom: '60px' }}>¿Ya tienes una cuenta? <a className='link' onClick={handleChange}>Inicia sesión</a></p>
-                                }
                             </Card>
                         </Grid>
                     </Grid>
@@ -159,36 +122,19 @@ function Login({ setIsToken }) {
                     </Grid>
                 }
                 <Dialog
-                    open={isCreated}
+                    open={isUpdated}
                     keepMounted
-                    onClose={handleIsCreated}
+                    onClose={handleIsUpdate}
                     aria-describedby="alert-dialog-delete-cli"
                     aria-labelledby="scroll-dialog-title"
                 >
                     <Grid container spacing={2}>
                         <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '50px' }}>
                             <VerifiedUserIcon color="success" />&nbsp;
-                            <p>Usuario creado con éxito! Ahora debe iniciar sesión</p>
+                            <p>Usuario actualizado con éxito!</p>
                         </Grid>
                         <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingBottom: '30px' }}>
-                            <Button onClick={handleIsCreated}>Continuar</Button>
-                        </Grid>
-                    </Grid>
-                </Dialog>
-                <Dialog
-                    open={isErrorCreated}
-                    keepMounted
-                    onClose={handleIsError}
-                    aria-describedby="alert-dialog-delete-cli"
-                    aria-labelledby="scroll-dialog-title"
-                >
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '50px' }}>
-                            <ErrorIcon color="error" />&nbsp;
-                            <p>El usuario no se pudo crear con éxito, por favor intente nuevamente</p>
-                        </Grid>
-                        <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingBottom: '30px' }}>
-                            <Button onClick={handleIsError}>Reintentar</Button>
+                            <Button onClick={handleIsUpdate}>Continuar</Button>
                         </Grid>
                     </Grid>
                 </Dialog>
@@ -202,7 +148,7 @@ function Login({ setIsToken }) {
                     <Grid container spacing={2}>
                         <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '50px' }}>
                             <ErrorIcon color="error" />&nbsp;
-                            <p>Error al iniciar sesión, por favor validar las credenciales</p>
+                            <p>Error al intentar almacenar los datos, por favor intente nuevamente</p>
                         </Grid>
                         <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingBottom: '30px' }}>
                             <Button onClick={handleIsError}>Reintentar</Button>
@@ -214,4 +160,4 @@ function Login({ setIsToken }) {
     )
 }
 
-export default Login;
+export default Users;

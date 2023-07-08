@@ -12,7 +12,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import { orange } from '@mui/material/colors';
-import { Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import AssistantDirectionIcon from '@mui/icons-material/AssistantDirection';
@@ -21,6 +21,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function Options() {
 
+    const username = localStorage.getItem('username');
+    const inicial = username.charAt(0).toLocaleUpperCase();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [state, setState] = React.useState({
         top: false,
@@ -41,8 +43,20 @@ export default function Options() {
     const navigate = useNavigate();
 
     const handleGotoQuiz = () => {
-        navigate('/quiz')
+        navigate('/quiz');
     };
+
+    const handleGoToLogin = () => {
+        navigate('/login');
+    }
+
+    const handleGoToUsers = () => {
+        navigate('/users');
+    }
+
+    const handleGoToHelp = () => {
+        navigate('/help');
+    }
 
     const list = (anchor) => (
         <Box
@@ -54,41 +68,25 @@ export default function Options() {
             <div className="text-title">
                 <Grid container justifyContent="center">
                     <Avatar sx={{ bgcolor: orange[500] }} variant="rounded">
-                        C
+                        {inicial}
                     </Avatar>
                 </Grid>
                 <br />
-                <Typography>callmemapa</Typography>
+                <Typography>{username}</Typography>
                 <br />
             </div>
             <Divider />
             <List>
-                {['Mi cuenta', 'Mis quices', '¿Cómo navegar?'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-
-                        <ListItemButton onClick={handleGotoQuiz}>
-                            <ListItemIcon >
-                                {index === 0 && <AccountCircleIcon /> }
-                                {index === 1 && <NoteAltIcon /> } 
-                                {index === 2 && <AssistantDirectionIcon /> }
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+                <br/>
+                <Button sx={{ color: 'black' }} onClick={handleGoToUsers}>&nbsp;<AccountCircleIcon />&nbsp; Mi cuenta</Button><br/><br/>
+                <Button sx={{ color: 'black' }} onClick={handleGotoQuiz}>&nbsp;<NoteAltIcon />&nbsp; Mis quices</Button><br/><br/>
+                <Button sx={{ color: 'black' }} onClick={handleGoToHelp}>&nbsp;<AssistantDirectionIcon />&nbsp; ¿Cómo navegar?</Button>
+                <br/>
             </List>
             <Divider />
             <List>
-                {['Cerrar sesión'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index === 0 && <LogoutIcon /> }
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+                <br/>
+                <Button sx={{ color: 'black' }} onClick={handleGoToLogin}>&nbsp;<LogoutIcon />&nbsp; Cerrar sesión</Button>
             </List>
         </Box>
     );

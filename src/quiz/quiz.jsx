@@ -72,6 +72,10 @@ export const Quiz = () => {
     navigate(`/home`);
   };
 
+  const handleToHome = () => {
+    navigate('/home');
+  }
+
   return (
     <>
       <div className="container">
@@ -120,6 +124,12 @@ export const Quiz = () => {
                     disabled={!isValid}
                   >
                     Enviar respuestas
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={handleToHome}
+                  >
+                    Cancelar
                   </Button>
                 </CardActions>
               </Card>

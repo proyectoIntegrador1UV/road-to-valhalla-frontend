@@ -14,7 +14,7 @@ export default function SceneEconomic(props) {
 
   //Manejador de Animaciones de Objetos
   useEffect(() => {
-    console.log(actions);
+    // console.log(actions);
     actions.SwordAction.play();
     actions.FlagAction.play();
     actions.ChestAction.play();
