@@ -14,7 +14,7 @@ export default function SceneEconomic(props) {
 
   //Manejador de Animaciones de Objetos
   useEffect(() => {
-    console.log(actions);
+    // console.log(actions);
     actions.SwordAction.play();
     actions.FlagAction.play();
     actions.ChestAction.play();
@@ -64,7 +64,8 @@ export default function SceneEconomic(props) {
       {
         isDetailEspada &&
         <Details
-          position={[4000, 0, 0]}
+           ref = {group}
+          position={[5350, 0, 0]}
           handleClose={handleClose}
           title={'Espada Vikinga'}
           description={'La espada nórdica tenía una relación importante con la economía en la sociedad vikinga. Era un símbolo de estatus y poder, y poseer una espada de alta calidad era muestra de riqueza y prestigio. Los herreros especializados tenían un estatus privilegiado y podían comerciar en diferentes regiones. Las espadas de calidad eran deseables para nobles, guerreros y comerciantes en busca de ganancias considerables.'}
@@ -73,7 +74,7 @@ export default function SceneEconomic(props) {
       {
         isDetailLanza &&
         <Details
-          position={[4000, 0, 0]}
+          position={[5350, 0, 0]}
           handleClose={handleClose}
           title={'Lanza Pesca Nórdica'}
           description={'La lanza de pesca vikinga era una arma y herramienta esencial para la subsistencia y también estaba relacionada con la economía de la sociedad nórdica. Los vikingos la utilizaban para pescar y obtener alimentos, así como para comerciar productos marinos, generando ingresos y contribuyendo al desarrollo económico de las comunidades costeras.'}
@@ -82,7 +83,7 @@ export default function SceneEconomic(props) {
       {
         isDetailEstandarte && 
         <Details
-          position={[4000, 0, 0]}
+          position={[5350, 0, 0]}
           handleClose={handleClose}
           title={'Estandarte Vikingo'}
           description={'Los estandartes vikingos no solo eran distintivos militares, sino que también eran importantes en las actividades económicas. Se levantaban en los barcos durante incursiones y expediciones comerciales para identificar a un grupo específico. Estos estandartes no solo representaban unidad y lealtad, sino que también establecían la reputación y credibilidad de los vikingos como comerciantes. Facilitaban el reconocimiento mutuo entre los comerciantes y las comunidades con las que interactuaban.'}
@@ -91,7 +92,7 @@ export default function SceneEconomic(props) {
       {
         isDetailCarreta && 
         <Details
-          position={[4000, 0, 0]}
+          position={[5350, 0, 0]}
           handleClose={handleClose}
           title={'Carretilla de Madera'}
           description={'La carretilla de madera nórdica era una herramienta esencial en la sociedad antigua y estaba estrechamente relacionada con el ámbito económico. Facilitaba el transporte eficiente de productos agrícolas y comerciales, contribuyendo al desarrollo económico de las comunidades nórdicas.'}
@@ -100,7 +101,7 @@ export default function SceneEconomic(props) {
       {
         isDetailCofre && 
         <Details
-          position={[4000, 0, 0]}
+          position={[5350, 0, 0]}
           handleClose={handleClose}
           title={'Cofre Artesanal'}
           description={'Una obra de artesanía elaborada, protegía objetos valiosos y desempeñaba un papel clave en el ámbito económico. Era utilizado como seguro y medio de intercambio por comerciantes, resguardando sus riquezas y bienes comerciales. Además, representaba la continuidad económica y la acumulación de riqueza a través de generaciones en la sociedad nórdica.'}
