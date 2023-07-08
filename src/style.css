@@ -76,3 +76,18 @@ body,
     text-decoration: underline;
     cursor: pointer;
 }
+
+.avatar {
+    background-color: transparent;
+    position: fixed;
+    bottom: 11px; 
+    left: 10px; 
+    z-index: 1;
+    cursor: pointer;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
