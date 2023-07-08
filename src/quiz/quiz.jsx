@@ -17,12 +17,15 @@ import { questions } from "./questions";
 import Dialog from "@mui/material/Dialog";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import ErrorIcon from '@mui/icons-material/Error';
+import { answersQuestion } from "./answers";
 
 const scenarioQuestions = questions;
+const answersQuestionsScenario = answersQuestion;
 
 export const Quiz = () => {
   const [answerQuestion, setAnswerQuestion] = useState([]);
   const [currentScenario, setCurrentScenario] = useState(0);
+  const [percentAnswer, setPercentAnswer] = useState(0);
 
   const [isCreated, setIsCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,15 +40,13 @@ export const Quiz = () => {
     event.preventDefault();
     setIsCreated(false);
     setIsLoading(true);
-    registerQuiz(scenarioQuestions[currentScenario].param, answerQuestion)
-      .then(() => {
-        setIsLoading(false);
-        setIsCreated(true);
-      })
-      .catch(() => {
-        setIsLoading(false);
-        setIsErrorCreated(true);
-      });
+    const result = validateAnswer();
+    setPercentAnswer(result);
+
+    setTimeout(() => {
+      setIsCreated(true);
+      setIsLoading(false);
+    }, 2000);
   };
 
   const handleGetAnswer = (answer) => {
@@ -74,6 +75,21 @@ export const Quiz = () => {
 
   const handleToHome = () => {
     navigate('/home');
+  }
+
+  const validateAnswer = () => {
+    const scenarioAnswer = answersQuestionsScenario[currentScenario].answers;
+    let correctAnswer = 0;
+    console.log(scenarioAnswer);
+    scenarioAnswer.forEach((result, index) => {
+      console.log(answerQuestion)
+      if (result.answer === answerQuestion[index].answer && result.id === answerQuestion[index].id ){
+        correctAnswer +=1;
+        console.log("aqui", correctAnswer)
+      }
+    });
+
+    return correctAnswer * 100 / scenarioAnswer.length;
   }
 
   return (
@@ -171,7 +187,7 @@ export const Quiz = () => {
             >
               <VerifiedUserIcon color="success" />
               &nbsp;
-              <p>Tus resultados fueron: </p>
+              <p>Porcentaje de acierto: {percentAnswer} % </p>
             </Grid>
             <Grid
               item
