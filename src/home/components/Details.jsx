@@ -3,9 +3,8 @@ import { Html } from '@react-three/drei';
 export default function Details(props) {
     
     return (
-        <>
-            <Html {...props}>
-                <div 
+            <Html {...props} occlude={true}>
+                <div
                     style={{
                         position: 'fixed',
                         top: 0,
@@ -20,20 +19,22 @@ export default function Details(props) {
                     <div
                         style={{
                             position: 'absolute',
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
+                            top: '0%',
+                            bottom: '0%',
+                            left: '0%',
+                            right: '0%',
+                            transform: 'translate(-50%,-50%)',
                             backgroundColor: 'rgba(0, 0, 0, 0.8)',
                             padding: '20px',
                             borderRadius: '10px',
-                            zIndex: 9999,
+                            zIndex: 9999999,
                             height: '500px',
                             width: '700px',
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
-                            justifyContent: 'center',
-                        }}
+                            justifyContent: 'center'
+                          }}
                     >
                         <button
                             style={{
@@ -63,6 +64,5 @@ export default function Details(props) {
                     </div>
                 </div>
             </Html>
-        </>
     );
 }
