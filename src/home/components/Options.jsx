@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import avatarImage from './../../assets/images/avatar.png';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
@@ -14,15 +14,29 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Avatar from '@mui/material/Avatar';
 import { orange } from '@mui/material/colors';
-import { Grid } from '@mui/material';
+import { Grid, Modal } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import AssistantDirectionIcon from '@mui/icons-material/AssistantDirection';
 import LogoutIcon from '@mui/icons-material/Logout';
 
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+    zIndex: 1
+};
+
 export default function Options() {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [isUserPopup, setIsUserPopup] = useState(false);
     const [state, setState] = React.useState({
         top: false,
         left: false,
@@ -63,9 +77,9 @@ export default function Options() {
 
                         <ListItemButton>
                             <ListItemIcon>
-                                {index === 0 && <AccountCircleIcon /> }
-                                {index === 1 && <NoteAltIcon /> } 
-                                {index === 2 && <AssistantDirectionIcon /> }
+                                {index === 0 && <AccountCircleIcon />}
+                                {index === 1 && <NoteAltIcon />}
+                                {index === 2 && <AssistantDirectionIcon />}
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>
@@ -78,7 +92,7 @@ export default function Options() {
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
-                                {index === 0 && <LogoutIcon /> }
+                                {index === 0 && <LogoutIcon />}
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>
@@ -96,53 +110,63 @@ export default function Options() {
         setAnchorEl(null);
     };
 
+    const handleOpenUser = () => {
+        setIsUserPopup(true);
+    }
+
+    const handleClose = () => {
+        setIsUserPopup(false);
+    }
+
     const open = Boolean(anchorEl);
 
     return (
-        <div className='avatar'>
+        <>
+            <div className='avatar'>
+                <Typography
+                    aria-owns={open ? 'mouse-over-popover' : undefined}
+                    aria-haspopup="true"
+                    onMouseEnter={handlePopoverOpen}
+                    onMouseLeave={handlePopoverClose}
+                >
+                    <div>
+                        {['left'].map((anchor) => (
+                            <React.Fragment key={anchor}>
+                                <button onClick={toggleDrawer(anchor, true)}><img src={avatarImage} height={100} alt='Avatar' /></button>
+                                <Drawer
+                                    anchor={anchor}
+                                    open={state[anchor]}
+                                    onClose={toggleDrawer(anchor, false)}
+                                >
+                                    {list(anchor)}
+                                </Drawer>
+                            </React.Fragment>
+                        ))}
+                    </div>
 
-            <Typography
-                aria-owns={open ? 'mouse-over-popover' : undefined}
-                aria-haspopup="true"
-                onMouseEnter={handlePopoverOpen}
-                onMouseLeave={handlePopoverClose}
-            >
-                <div>
-                    {['left'].map((anchor) => (
-                        <React.Fragment key={anchor}>
-                            <button onClick={toggleDrawer(anchor, true)}><img src={avatarImage} height={100} alt='Avatar' /></button>
-                            <Drawer
-                                anchor={anchor}
-                                open={state[anchor]}
-                                onClose={toggleDrawer(anchor, false)}
-                            >
-                                {list(anchor)}
-                            </Drawer>
-                        </React.Fragment>
-                    ))}
-                </div>
+                </Typography>
+                <Popover
+                    id="mouse-over-popover"
+                    sx={{
+                        pointerEvents: 'none',
+                    }}
+                    open={open}
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                    }}
+                    onClose={handlePopoverClose}
+                    disableRestoreFocus
+                >
+                    <Typography sx={{ p: 1 }}>¡Clickeame si necesitas ayuda!</Typography>
+                </Popover>
+            </div>
+        </>
 
-            </Typography>
-            <Popover
-                id="mouse-over-popover"
-                sx={{
-                    pointerEvents: 'none',
-                }}
-                open={open}
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                onClose={handlePopoverClose}
-                disableRestoreFocus
-            >
-                <Typography sx={{ p: 1 }}>¡Clickeame si necesitas ayuda!</Typography>
-            </Popover>
-        </div>
     );
 }

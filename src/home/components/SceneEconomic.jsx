@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
+import { useGLTF, useAnimations, Text } from "@react-three/drei";
 import Details from './Details';
 import Shelf from './Shelf';
 import swordImage from './../../assets/images/sword.png';
@@ -7,10 +7,12 @@ import pushcartImage from './../../assets/images/wheelbarrow.png';
 import flagImage from './../../assets/images/flag.jpg';
 import chestImage from './../../assets/images/chest.png';
 import spearImage from './../../assets/images/spear.png';
+import { Box, Modal, Typography } from "@mui/material";
 export default function SceneEconomic(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("/static/models/scene_cold.glb");
   const { actions } = useAnimations(animations, group);
+  const [open, setOpen] = React.useState(false);
 
   //Manejador de Animaciones de Objetos
   useEffect(() => {
@@ -22,53 +24,60 @@ export default function SceneEconomic(props) {
     actions.Wheel_barrowAction.play();
   });
 
-   //Manejadores de Detalle Abierto
-   const [isDetailEspada, setIsDetailEspada] = useState(false);
-   const [isDetailCarreta, setIsDetailCarreta] = useState(false);
-   const [isDetailEstandarte, setIsDetailEstandarte] = useState(false);
-   const [isDetailCofre, setIsDetailCofre] = useState(false);
-   const [isDetailLanza, setIsDetailLanza] = useState(false);
-   
-   //Manejador de Evento de Detalle Abierto
-   const handleOpenEspada = () => {
-     setIsDetailEspada(true);
-   };
+  //Manejadores de Detalle Abierto
+  const [isDetailEspada, setIsDetailEspada] = useState(false);
+  const [isDetailCarreta, setIsDetailCarreta] = useState(false);
+  const [isDetailEstandarte, setIsDetailEstandarte] = useState(false);
+  const [isDetailCofre, setIsDetailCofre] = useState(false);
+  const [isDetailLanza, setIsDetailLanza] = useState(false);
 
-   const handleOpenCarreta = () => {
-     setIsDetailCarreta(true);
-   };
+  //Manejador de Evento de Detalle Abierto
+  const handleOpenEspada = () => {
+    setIsDetailEspada(true);
+    setOpen(true);
+  };
 
-   const handleOpenEstandarte = () => {
-   setIsDetailEstandarte(true);
-   };
+  const handleOpenCarreta = () => {
+    setIsDetailCarreta(true);
+  };
 
-   const handleOpenCofre = () => {
-     setIsDetailCofre(true);
-   };
+  const handleOpenEstandarte = () => {
+    setIsDetailEstandarte(true);
+  };
 
-   const handleOpenLanza = () => {
-     setIsDetailLanza(true);
-   };
+  const handleOpenCofre = () => {
+    setIsDetailCofre(true);
+  };
 
-   //Manejador de Evento de Detalle Cerrado
-   const handleClose = () => {
-     setIsDetailEspada(false);
-     setIsDetailLanza(false);
-     setIsDetailEstandarte(false);
-     setIsDetailCarreta(false);
-     setIsDetailCofre(false);
-   };
+  const handleOpenLanza = () => {
+    setIsDetailLanza(true);
+  };
+
+  //Manejador de Evento de Detalle Cerrado
+  const handleClose = () => {
+    setIsDetailEspada(false);
+    setIsDetailLanza(false);
+    setIsDetailEstandarte(false);
+    setIsDetailCarreta(false);
+    setIsDetailCofre(false);
+    setOpen(false);
+  };
+
+
 
   return (
     <>
       {
         isDetailEspada &&
-        <Details
-          position={[4000, 0, 0]}
-          handleClose={handleClose}
-          title={'Espada Vikinga'}
-          description={'La espada nórdica tenía una relación importante con la economía en la sociedad vikinga. Era un símbolo de estatus y poder, y poseer una espada de alta calidad era muestra de riqueza y prestigio. Los herreros especializados tenían un estatus privilegiado y podían comerciar en diferentes regiones. Las espadas de calidad eran deseables para nobles, guerreros y comerciantes en busca de ganancias considerables.'}
-          url_img={swordImage} />
+        <Box position={[0, 0, -3]}>
+          <Text fontSize={0.4} position={[0, 0.5, 0]}>
+            Text in a modal
+          </Text>
+          <mesh position={[0, -0.5, 0]}>
+            <boxGeometry args={[2, 0.2, 0.1]} />
+            <meshBasicMaterial color="white" />
+          </mesh>
+        </Box>
       }
       {
         isDetailLanza &&
@@ -80,7 +89,7 @@ export default function SceneEconomic(props) {
           url_img={spearImage} />
       }
       {
-        isDetailEstandarte && 
+        isDetailEstandarte &&
         <Details
           position={[4000, 0, 0]}
           handleClose={handleClose}
@@ -89,7 +98,7 @@ export default function SceneEconomic(props) {
           url_img={flagImage} />
       }
       {
-        isDetailCarreta && 
+        isDetailCarreta &&
         <Details
           position={[4000, 0, 0]}
           handleClose={handleClose}
@@ -98,9 +107,9 @@ export default function SceneEconomic(props) {
           url_img={pushcartImage} />
       }
       {
-        isDetailCofre && 
+        isDetailCofre &&
         <Details
-          position={[4000, 0, 0]}
+          position={[4500, 0, 0]}
           handleClose={handleClose}
           title={'Cofre Artesanal'}
           description={'Una obra de artesanía elaborada, protegía objetos valiosos y desempeñaba un papel clave en el ámbito económico. Era utilizado como seguro y medio de intercambio por comerciantes, resguardando sus riquezas y bienes comerciales. Además, representaba la continuidad económica y la acumulación de riqueza a través de generaciones en la sociedad nórdica.'}
@@ -109,7 +118,7 @@ export default function SceneEconomic(props) {
       <>
         <group ref={group} {...props} dispose={null}>
           <group position={[2700, -230, -1000]} scale={27}>
-            <Shelf position={[40, 5, 5]}/>
+            <Shelf position={[40, 5, 5]} />
             <mesh
               name="Flag"
               castShadow

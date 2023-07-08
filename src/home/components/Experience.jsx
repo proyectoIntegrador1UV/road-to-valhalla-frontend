@@ -25,6 +25,5 @@ export default function Experience() {
             </Scroll>
             </ScrollControls>
         </ThreeScene>
-        
     </>
 }
